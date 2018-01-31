@@ -24,6 +24,7 @@ HAROLD_VOL=60
 		TIME= date +"%H" # Hour 23 - 9 Sunday to Thurday; 1 - 9 Friday to Saturday 
 		declare -i TIME
 
+		# Check the day, and corresponding quiet hours.  Then set volume accordingly
 		if [ $WEEKDAY > 4 ] && [ $WEEKDAY < 7 ]; then
 			if [ $TIME > 0 ] && [ $TIME < 10 ]; then
 				echo "Setting Volume to $HAROLD_QH_VOL" > $HAROLD_lOG_FILE
@@ -38,8 +39,7 @@ HAROLD_VOL=60
 			fi 
 		fi
 
-		
-
+		# Retrieve Audiophiler stream, and play it
 		HAROLD_URL= curl -H "Content-Type: application/json" -X POST -d '{"auth_key":"$AUDIOPHILER_KEY"}' "$AUDIOPHILER_BASE_URL/zedoax"
 		mpg123 --timeout 30 "$HAROLD_URL"
 	# }
