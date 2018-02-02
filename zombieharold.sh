@@ -7,10 +7,10 @@
 # Temporary storage of ibutton data
 # python -c 'from ibutton2uid import ibutton2uid; ibutton2uid("ibutton#number")'
 
-AUDIOPHILER_KEY="AUTH_KEY"
+AUDIOPHILER_KEY="AUDIOPHILERKEY"
 AUDIOPHILER_BASE_URL="https://audiophiler.csh.rit.edu/get_harold"
 
-HAROLD_LOG_FILE=".bringbackharold.log"
+HAROLD_LOG_FILE=".zombieharold.log"
 
 HAROLD_QH_VOL=10
 HAROLD_VOL=60
@@ -40,7 +40,7 @@ HAROLD_VOL=60
 		fi
 
 		# Retrieve Audiophiler stream, and play it
-		HAROLD_URL= curl -H "Content-Type: application/json" -X POST -d '{"auth_key":"$AUDIOPHILER_KEY"}' "$AUDIOPHILER_BASE_URL/zedoax"
-		mpg123 --timeout 30 "$HAROLD_URL"
+		HAROLD_URL=$( curl -H "Content-Type: application/json" -X POST -d '{"auth_key":"AUTHKEY"}' "$AUDIOPHILER_BASE_URL/zedoax")
+		mplayer -endpos 00:00:30 "$HAROLD_URL"
 	# }
 # done
